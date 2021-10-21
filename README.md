@@ -1,5 +1,5 @@
 # **ne-ansible-plugin**
-ne-ansible-plugin is an ansible plugin for managing huawei net-engine series products, such as ATN,
+ne-ansible-plugin is an ansible plugin which is designed for managing HUAWEI net-engine series devices, e.g., ATN,
 NE,ME,CX routers.
 
 ## **Features**
@@ -21,7 +21,9 @@ NE,ME,CX routers.
 
 ### configure environment
 
-`vi /etc/profile`
+```
+$vi /etc/profile
+```
 
 add ansible path and ncclient path
 
@@ -29,19 +31,31 @@ add ansible path and ncclient path
 
 `export ansible_path="/usr/lib/python2.7/site-packages/ansible-2.6.7.post0-py2.7.egg/ansible"`
 
-or whatever version of python you installed
+changed the version of python you installed
 
-`source /etc/profile`
+```
+$source /etc/profile
+```
 
 ### obtain code
 
-git clone https://github.com/HuaweiDatacomm/ne-ansible-plugin.git
+```
+$git clone https://github.com/HuaweiDatacomm/ne-ansible-plugin.git
+```
 
-### run install.sh
+### execute install.sh
 
-`cd ne-ansible-plugin`
+```
+$cd ne-ansible-plugin
+```
 
-`chmod 777 install.sh`
+```
+$chmod +x ./install.sh
+```
 
-`sh install.sh`
+```
+$sh install.sh
+```
 
+## Additional Resources
+TBD
