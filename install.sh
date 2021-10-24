@@ -14,22 +14,16 @@ function getdir()
     done
 }
 
-ANSIBLE_PATH="$ansible_path"
-if [ -z "$ANSIBLE_PATH" ]; then
- echo "Error: ansible has not been installed."
-   exit 1
-fi
-if [ `ansible --version | head -1 | cut -f2 -d' '|cut -c1-3` >= "2.9" ]; then
-   echo "Error: The script only supports ansible 2.9."
-   exit 1
-fi
+ANSIBLE_PATH=`python -c  'import find_path; print find_path.get_ansible_path()'`
+echo $ANSIBLE_PATH
 
-NCCLIENT_PATH="$ncclient_path"
+
+
 
 if [ -z "$ANSIBLE_PATH" ] ; then
     echo "Error: Can not get Ansible location."
         if [ "which pip" ] ;then
-			pip install ansible
+			pip install ansible==2.9
 		else
 			echo "Please install pip"
 		fi
@@ -37,7 +31,10 @@ if [ -z "$ANSIBLE_PATH" ] ; then
 else
     echo "Ansible path:$ANSIBLE_PATH"
 fi
-
+if [ `ansible --version | head -1 | cut -f2 -d' '|cut -c1-3` >= "2.10" ]; then
+   echo "Error: The script only supports ansible 2.9."
+   exit 1
+fi
 echo "ne modules path:$ANSIBLE_PATH/modules/network"
 mkdir -p $ANSIBLE_PATH/module_utils/network/ne
 mkdir -p $ANSIBLE_PATH/modules/network/ne
@@ -56,20 +53,6 @@ if [ -d "./plugins" ]; then
 	cp -rf ./plugins/cliconf/* $ANSIBLE_PATH/plugins/cliconf
 fi
 
-if [ -d "$NCCLIENT_PATH" ]; then
-    echo "$NCCLIENT_PATH"
-else
-	echo "Error: ncclient has not been installed."
-		if [ "which pip" ]; then
-			pip install ncclient
-		else 
-			echo "Please install pip"
-		fi
-   exit 1
-fi
-
-
-
 echo "Updateing base.yml"
 ne_exist=`cat $ANSIBLE_PATH/config/base.yml | grep "NETWORK_GROUP_MODULES"| grep "ne"`
 if [ -z "$ne_exist" ]; then
@@ -79,30 +62,32 @@ if [ -z "$ne_exist" ]; then
     else 
         replace_line=`grep -rn ", aireos," $ANSIBLE_PATH/config/base.yml  | cut -d ":" -f 1`
         if [ $replace_line ]; then
-            sed -i "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
+            sed -i "" "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
         else
             echo "Update base.yml failed, NETWORK_GROUP_MODULES in base.yml should be manually updated."
         fi
     fi
 fi
 
-echo "Updateing plugin/conection/netconf.py"
+echo "Updating plugin/conection/netconf.py"
 huaweiyang_exist=`cat $ANSIBLE_PATH/plugins/connection/netconf.py | grep "NETWORK_OS_DEVICE_PARAM_MAP ="`
 if [ "$huaweiyang_exist" ]; then
     ne_exist=`grep -rn '    "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py  | cut -d ":" -f 1`
     if [ $ne_exist ]; then
         echo "plugin/conection/netconf.py failed, ne has already in NETWORK_OS_DEVICE_PARAM_MAP."
     else 
-        sed -i '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\    "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py
+        sed -i "" '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
+                                          "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py
                    echo "Update plugins/connetion/netconf.py Success."
     fi
 fi
 
-echo "Updateing plugin/action/net_base.py"
-ne_platform_exist=`cat $ansible_path/plugins/action/net_base.py | grep "_NETCONF_SUPPORTED_PLATFORMS ="`
+echo "Updating plugin/action/net_base.py"
+ne_platform_exist=`cat $ANSIBLE_PATH/plugins/action/net_base.py | grep "_NETCONF_SUPPORTED_PLATFORMS ="`
 if [ "$ne_platform_exist" ]; then
-    sed -i '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ansible_path/plugins/action/net_base.py
-    sed -i '/CLI_ONLY_MODULES =/a\_NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ansible_path/plugins/action/net_base.py
+    sed -i "" '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
+    sed -i "" '/CLI_ONLY_MODULES =/a\
+           _NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ANSIBLE_PATH/plugins/action/net_base.py
 fi
 
 echo "ne Ansible library installed."
