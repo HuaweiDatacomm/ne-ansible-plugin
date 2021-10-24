@@ -19,24 +19,6 @@ NE,ME,CX routers.
 - Python:  python2.6 or later (python 2.7 is preferred)/python3.x
 - Ansible: 2.6 or later, lower than 2.10
 
-### configure environment
-
-```
-$vi /etc/profile
-```
-
-add ansible path and ncclient path
-
-`export ncclient_path="/usr/lib/python2.7/site-packages/ncclient"`
-
-`export ansible_path="/usr/lib/python2.7/site-packages/ansible-2.6.7.post0-py2.7.egg/ansible"`
-
-changed the version of python you installed
-
-```
-$source /etc/profile
-```
-
 ### obtain code
 
 ```
