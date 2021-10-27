@@ -14,7 +14,7 @@ function getdir()
     done
 }
 
-ANSIBLE_PATH=`python -c  'import find_path; print find_path.get_ansible_path()'`
+ANSIBLE_PATH=`python -c  'import find_path; print (find_path.get_ansible_path())'`
 echo $ANSIBLE_PATH
 
 
