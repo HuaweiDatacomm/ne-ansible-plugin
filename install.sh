@@ -4,21 +4,22 @@ function getdir()
     for element in `ls $1`
     do  
         dir_or_file=$1"/"$element
-        if [ -d $dir_or_file ]
-        then 
-            getdir $dir_or_file $2
+        if [ -d "$dir_or_file" ]
+        then
+            if [ ! -d $2"/"$element ]
+            then
+                mkdir $2"/"$element
+            fi
+            getdir $dir_or_file $2"/"$element
         else
-            echo $dir_or_file
             cp -rf $dir_or_file $2
+            echo copied $dir_or_file to $2
         fi  
     done
 }
 
 ANSIBLE_PATH=`python -c  'import find_path; print (find_path.get_ansible_path())'`
 echo $ANSIBLE_PATH
-
-
-
 
 if [ -z "$ANSIBLE_PATH" ] ; then
     echo "Error: Can not get Ansible location."
@@ -53,8 +54,8 @@ if [ -d "./plugins" ]; then
 	cp -rf ./plugins/cliconf/* $ANSIBLE_PATH/plugins/cliconf
 fi
 
-echo "Updateing base.yml"
-ne_exist=`cat $ANSIBLE_PATH/config/base.yml | grep "NETWORK_GROUP_MODULES"| grep "ne"`
+echo "Updating base.yml"
+ne_exist=`cat $ANSIBLE_PATH/config/base.yml | grep -A3 "NETWORK_GROUP_MODULES"| grep "ireos, ne"`
 if [ -z "$ne_exist" ]; then
     name_exist=`grep -rnw ", ne" $ANSIBLE_PATH/config/base.yml  | cut -d ":" -f 1`
     if [ $name_exist ]; then
@@ -63,6 +64,7 @@ if [ -z "$ne_exist" ]; then
         replace_line=`grep -rn ", aireos," $ANSIBLE_PATH/config/base.yml  | cut -d ":" -f 1`
         if [ $replace_line ]; then
             sed -i "" "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
+            echo "Update base.yml successfully."
         else
             echo "Update base.yml failed, NETWORK_GROUP_MODULES in base.yml should be manually updated."
         fi
