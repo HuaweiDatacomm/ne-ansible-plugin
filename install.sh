@@ -3,17 +3,18 @@ function getdir()
 {
     for element in `ls $1`
     do  
-        dir_or_file=$1"/"$element
+        dir_or_file="$1"/"$element"
         if [ -d "$dir_or_file" ]
         then
-            if [ ! -d $2"/"$element ]
+            if [ -d "$2"/"$element" ]
             then
-                mkdir $2"/"$element
+                rm -rf "$2"/"$element"
             fi
-            getdir $dir_or_file $2"/"$element
+            mkdir "$2"/"$element"
+            getdir "$dir_or_file" "$2"/"$element"
         else
-            cp -rf $dir_or_file $2
-            echo copied $dir_or_file to $2
+            cp -rf "$dir_or_file" "$2"
+            echo copied "$dir_or_file" to "$2"
         fi  
     done
 }
