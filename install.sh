@@ -76,7 +76,7 @@ if [ "$huaweiyang_exist" ]; then
     if [ $ne_exist ]; then
         echo "plugin/conection/netconf.py failed, ne has already in NETWORK_OS_DEVICE_PARAM_MAP."
     else 
-        sed -i "" '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
+        sed -i  '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
                                           "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py
                    echo "Update plugins/connetion/netconf.py Success."
     fi
@@ -85,8 +85,8 @@ fi
 echo "Updating plugin/action/net_base.py"
 ne_platform_exist=`cat $ANSIBLE_PATH/plugins/action/net_base.py | grep "_NETCONF_SUPPORTED_PLATFORMS ="`
 if [ "$ne_platform_exist" ]; then
-    sed -i "" '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
-    sed -i "" '/CLI_ONLY_MODULES =/a\
+    sed -i  '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
+    sed -i  '/CLI_ONLY_MODULES =/a\
            _NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ANSIBLE_PATH/plugins/action/net_base.py
 fi
 
