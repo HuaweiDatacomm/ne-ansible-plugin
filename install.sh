@@ -1,8 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
+if [ "$(uname)" == "Darwin" ] ; then
+    SYSTEM_TYPE="MAC"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ] ; then
+    SYSTEM_TYPE="LINUX"
+elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
+    SYSTEM_TYPE="WINDOWS"
+fi
+echo $SYSTEM_TYPE
 function getdir()
 {
     for element in `ls $1`
-    do  
+    do
         dir_or_file="$1"/"$element"
         if [ -d "$dir_or_file" ]
         then
@@ -15,7 +23,7 @@ function getdir()
         else
             cp -rf "$dir_or_file" "$2"
             echo copied "$dir_or_file" to "$2"
-        fi  
+        fi
     done
 }
 
@@ -61,10 +69,15 @@ if [ -z "$ne_exist" ]; then
     name_exist=`grep -rnw ", ne" $ANSIBLE_PATH/config/base.yml  | cut -d ":" -f 1`
     if [ $name_exist ]; then
         echo "Update base.yml failed, ne has already in base.yml."
-    else 
+    else
         replace_line=`grep -rn ", aireos," $ANSIBLE_PATH/config/base.yml  | cut -d ":" -f 1`
         if [ $replace_line ]; then
-            sed -i "" "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
+            if [ SYSTEM_TYPE  == "MAC" ]; then
+                sed -i "" "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
+            else
+                sed -i "s/aireos/aireos, ne/g" $ANSIBLE_PATH/config/base.yml
+            fi
+
             echo "Update base.yml successfully."
         else
             echo "Update base.yml failed, NETWORK_GROUP_MODULES in base.yml should be manually updated."
@@ -77,20 +90,31 @@ huaweiyang_exist=`cat $ANSIBLE_PATH/plugins/connection/netconf.py | grep "NETWOR
 if [ "$huaweiyang_exist" ]; then
     ne_exist=`grep -rn '    "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py  | cut -d ":" -f 1`
     if [ $ne_exist ]; then
-        echo "plugin/conection/netconf.py failed, ne has already in NETWORK_OS_DEVICE_PARAM_MAP."
-    else 
-        sed -i  '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
+        echo "ne has already in NETWORK_OS_DEVICE_PARAM_MAP."
+    else
+        if [ SYSTEM_TYPE  == "MAC" ]; then
+            sed -i  "" '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
                                           "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py
-                   echo "Update plugins/connetion/netconf.py Success."
+        else
+            sed -i  '/^NETWORK_OS_DEVICE_PARAM_MAP =/a\
+                                          "ne": "huaweiyang",' $ANSIBLE_PATH/plugins/connection/netconf.py
+        fi
+        echo "Update plugins/connetion/netconf.py Success."
     fi
 fi
 
 echo "Updating plugin/action/net_base.py"
 ne_platform_exist=`cat $ANSIBLE_PATH/plugins/action/net_base.py | grep "_NETCONF_SUPPORTED_PLATFORMS ="`
 if [ "$ne_platform_exist" ]; then
-    sed -i  '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
-    sed -i  '/CLI_ONLY_MODULES =/a\
-           _NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ANSIBLE_PATH/plugins/action/net_base.py
+     if [ SYSTEM_TYPE  == "MAC" ]; then
+             sed -i  "" '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
+             sed -i  "" '/CLI_ONLY_MODULES =/a\
+                            _NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ANSIBLE_PATH/plugins/action/net_base.py
+     else
+           sed -i  '/NETCONF_SUPPORTED_PLATFORMS =/d'  $ANSIBLE_PATH/plugins/action/net_base.py
+           sed -i  '/CLI_ONLY_MODULES =/a\
+                           _NETCONF_SUPPORTED_PLATFORMS = frozenset(["junos", "iosxr", "ne"])'  $ANSIBLE_PATH/plugins/action/net_base.py
+    fi
 fi
 
 echo "ne Ansible library installed."
