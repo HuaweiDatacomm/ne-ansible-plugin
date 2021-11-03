@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-__author__ = 'lWX636554'
+__author__ = 'guanlong huang'
 try:
     import xml.etree.cElementTree as ET
 except ImportError:
