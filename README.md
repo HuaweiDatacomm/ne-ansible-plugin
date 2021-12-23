@@ -12,20 +12,20 @@ NE,ME,CX routers.
 []()
 
 ## installation
-
-### Prerequisites
+###From Code
+#### Prerequisites
 
 - OS: Red Hat,Ubuntu,CentOS,OS X,BSD,Suse
 - Python:  python2.6 or later (python 2.7 is preferred)/python3.x
 - Ansible: 2.6 or later, lower than 2.10
 
-### obtain code
+#### obtain code
 
 ```
 $git clone https://github.com/HuaweiDatacomm/ne-ansible-plugin.git
 ```
 
-### execute install.sh
+#### execute install.sh
 
 ```
 $cd ne-ansible-plugin
@@ -38,6 +38,10 @@ $chmod +x ./install.sh
 ```
 $sh install.sh
 ```
-
+###From Ansible-Collection
+####Download tarball
+https://galaxy.ansible.com/huaweidatacom/ne
+####Installation
+ansible-galaxy collection install huaweidatacom.ne
 ## Additional Resources
 TBD
