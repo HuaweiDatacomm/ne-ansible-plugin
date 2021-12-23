@@ -12,7 +12,7 @@ NE,ME,CX routers.
 []()
 
 ## installation
-###From Code
+### From Code
 #### Prerequisites
 
 - OS: Red Hat,Ubuntu,CentOS,OS X,BSD,Suse
@@ -38,10 +38,14 @@ $chmod +x ./install.sh
 ```
 $sh install.sh
 ```
-###From Ansible-Collection
-####Download tarball
+### From Ansible-Collection
+#### Download tarball
+```
 https://galaxy.ansible.com/huaweidatacom/ne
-####Installation
+```
+#### Installation
+```
 ansible-galaxy collection install huaweidatacom.ne
+```
 ## Additional Resources
 TBD
