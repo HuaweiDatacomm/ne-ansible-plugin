@@ -41,7 +41,14 @@ if [ -z "$ANSIBLE_PATH" ] ; then
 else
     echo "Ansible path:$ANSIBLE_PATH"
 fi
-if [ `ansible --version | head -1 | cut -f2 -d' '|cut -c1-3` >= "2.10" ]; then
+VERSION=`ansible --version | head -1 | awk -F" " '{print $2}'`
+VERSION2="2.10.0"
+ 
+
+function version_ge() { test "$(echo "$@" | tr " " "\n" | sort -rV | head -n 1)" == "$1"; }
+ 
+
+if version_ge $VERSION $VERSION2; then
    echo "Error: The script only supports ansible 2.9."
    exit 1
 fi
