@@ -357,8 +357,8 @@ lldoNeighbors Info
 
 import re
 import sys
-from ansible.module_utils.network.ne.ne import get_nc_config
-from ansible.module_utils.network.ne.ne import ne_argument_spec, check_args
+from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import get_nc_config
+from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import ne_argument_spec, check_args
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.six import iteritems
 if sys.version_info.major != 2:
