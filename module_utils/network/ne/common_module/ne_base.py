@@ -13,11 +13,11 @@ from lxml import etree
 from xml.dom.minidom import parseString
 from ansible.module_utils.basic import AnsibleModule
 from ansible.module_utils.connection import Connection, ConnectionError
-from ..ne import get_nc_config, ne_argument_spec, get_nc_connection, to_text, to_string, execute_nc_action_yang
+from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import get_nc_config, ne_argument_spec, get_nc_connection, to_text, to_string, execute_nc_action_yang
 #from ansible.module_utils.network.ne.ne import get_nc_config, ne_argument_spec, get_nc_connection, to_text, to_string, execute_nc_action_yang
-from ansible.module_utils.network.ne.common_module.checkparams import check_params
+from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common_module.checkparams import check_params
 import xmltodict
-from ansible.module_utils.network.ne.common_module.xml_build_with_xmlns import xml_parser_join_xmlns
+from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common_module.xml_build_with_xmlns import xml_parser_join_xmlns
 
 try:
     from ncclient.xml_ import to_xml
