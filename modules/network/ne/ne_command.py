@@ -135,8 +135,8 @@ import sys
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import ne_argument_spec, check_args
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import run_commands
-from ansible.module_utils.network.common.parsing import Conditional
-from ansible.module_utils.network.common.utils import ComplexList
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.parsing import Conditional
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils import ComplexList
 from ansible.module_utils.six import string_types
 from ansible.module_utils._text import to_native
 
