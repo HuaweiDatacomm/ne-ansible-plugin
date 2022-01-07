@@ -18,7 +18,7 @@ from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne imp
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common_module.checkparams import check_params
 import xmltodict
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common_module.xml_build_with_xmlns import xml_parser_join_xmlns
-
+from ansible.module_utils.common.yaml import yaml_load
 try:
     from ncclient.xml_ import to_xml
     HAS_NCCLIENT = True
