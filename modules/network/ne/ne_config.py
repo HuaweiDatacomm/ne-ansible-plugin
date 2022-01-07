@@ -252,9 +252,9 @@ import sys
 from ansible.module_utils.basic import AnsibleModule
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import ne_argument_spec
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.ne import run_commands
-from ansible.module_utils.network.common.utils import to_list
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils import to_list
 from ansible.module_utils.six import string_types
-from ansible.module_utils.network.common.utils import ComplexList
+from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils import ComplexList
 from ansible.module_utils.connection import ConnectionError
 if sys.version_info.major != 2:
     import importlib
