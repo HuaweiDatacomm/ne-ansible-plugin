@@ -19,7 +19,7 @@ from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common
 import xmltodict
 from ansible_collections.huaweidatacom.ne.plugins.module_utils.network.ne.common_module.xml_build_with_xmlns import xml_parser_join_xmlns
 from ansible.module_utils.common.yaml import yaml_load
-from ansible.module_utils.common import *
+
 
 try:
     from ncclient.xml_ import to_xml
