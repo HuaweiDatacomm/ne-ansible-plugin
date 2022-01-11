@@ -39,6 +39,12 @@ $chmod +x ./install.sh
 $sh install.sh
 ```
 ### From Ansible-Collection
+#### Prerequisites
+
+- OS: Red Hat,Ubuntu,CentOS,OS X,BSD,Suse
+- Python:  python3.6 or later (python 3.8 is preferred)/python3
+- Ansible: 2.9+ or later.
+
 #### Download tarball(Off line)
 ```
 https://galaxy.ansible.com/huaweidatacom/ne
