@@ -39,11 +39,14 @@ $chmod +x ./install.sh
 $sh install.sh
 ```
 ### From Ansible-Collection
-#### Download tarball
+#### Download tarball(Off line)
 ```
 https://galaxy.ansible.com/huaweidatacom/ne
+tar -zxvf huaweidatacom-ne-1.0.2.tar.gz
+ansible-galaxy collection install ./huaweidatacom-ne-1.0.2/ -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
+ansible-galaxy collection list(List all the installed collections)
 ```
-#### Installation
+#### Installation(On line)
 ```
 ansible-galaxy collection install huaweidatacom.ne
 ```
