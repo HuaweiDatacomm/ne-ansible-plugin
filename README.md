@@ -43,7 +43,7 @@ $sh install.sh
 
 - OS: Red Hat,Ubuntu,CentOS,OS X,BSD,Suse
 - Python:  python3.6 or later (python 3.8 is preferred)/python3
-- Ansible: 2.9+ or later.
+- Ansible: 2.10+ or later.
 
 #### Download tarball(Off line)
 ```
