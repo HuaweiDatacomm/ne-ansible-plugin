@@ -65,7 +65,7 @@ ansible-galaxy collection list(List all the installed collections)
 ```
 ansible-galaxy collection install huaweidatacom.ne
 ```
-## Command Plugin Templates for reference
+## Command Plugin Templates for reference（NE Modules Introduction）
 Please refer to https://intl.devzone.huawei.com/en/datacom/network-element/docs/ansibleNE/ansibleNE.html?mdName=command-plugin-templates.md
 ## Additional Resources
 TBD
