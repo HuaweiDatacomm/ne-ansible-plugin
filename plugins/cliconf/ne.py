@@ -19,7 +19,7 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import re
+import regex
 import json
 
 from itertools import chain
@@ -38,15 +38,15 @@ class Cliconf(CliconfBase):
         reply = self.get(b'display version')
         data = to_text(reply, errors='surrogate_or_strict').strip()
 
-        match = re.search(r'^Huawei.+\n.+\Version\s+(\S+)', data)
+        match = regex.search(r'^Huawei.+\n.+\Version\s+(\S+)', data)
         if match:
             device_info['network_os_version'] = match.group(1)
 
-        match = re.search(r'^Huawei(.+)\n.+\(\S+\s+\S+\)', data, re.M)
+        match = regex.search(r'^Huawei(.+)\n.+\(\S+\s+\S+\)', data, regex.M)
         if match:
             device_info['network_os_model'] = match.group(1)
 
-        match = re.search(r'HUAWEI\s+(\S+)\s+uptime', data, re.M)
+        match = regex.search(r'HUAWEI\s+(\S+)\s+uptime', data, regex.M)
         if match:
             device_info['network_os_hostname'] = match.group(1)
 
