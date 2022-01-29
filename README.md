@@ -51,11 +51,11 @@ wget  https://galaxy.ansible.com/huaweidatacom/ne
 ```
 
 ```
-tar -zxvf huaweidatacom-ne-1.0.2.tar.gz
+tar -zxvf huaweidatacom-ne-1.0.3.tar.gz
 ```
 
 ```
-ansible-galaxy collection install ./huaweidatacom-ne-1.0.2/ -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
+ansible-galaxy collection install ./huaweidatacom-ne-1.0.3/ -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
 ```
 
 ```
