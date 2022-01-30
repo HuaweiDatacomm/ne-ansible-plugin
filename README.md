@@ -59,7 +59,7 @@ tar -zxvf huaweidatacom-ne-1.0.3.tar.gz -C ./huaweidatacom-ne-1.0.3
 ```
 
 ```
-ansible-galaxy collection install ./huaweidatacom-ne-1.0.3/ -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
+ansible-galaxy collection install huaweidatacom-ne-1.0.3.tar.gz -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
 ```
 
 ```
