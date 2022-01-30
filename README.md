@@ -47,7 +47,7 @@ $sh install.sh
 
 #### Download tarball(Off line)
 ```
-wget  https://galaxy.ansible.com/huaweidatacom/ne
+wget  https://galaxy.ansible.com/download/huaweidatacom-ne-1.0.3.tar.gz
 ```
 
 ```
