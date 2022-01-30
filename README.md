@@ -51,6 +51,10 @@ wget  https://galaxy.ansible.com/download/huaweidatacom-ne-1.0.3.tar.gz
 ```
 
 ```
+mkdir ./huaweidatacom-ne-1.0.3 
+```
+
+```
 tar -zxvf huaweidatacom-ne-1.0.3.tar.gz
 ```
 
