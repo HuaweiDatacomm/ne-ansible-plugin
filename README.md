@@ -55,7 +55,7 @@ mkdir ./huaweidatacom-ne-1.0.3
 ```
 
 ```
-tar -zxvf huaweidatacom-ne-1.0.3.tar.gz
+tar -zxvf huaweidatacom-ne-1.0.3.tar.gz -C ./huaweidatacom-ne-1.0.3
 ```
 
 ```
