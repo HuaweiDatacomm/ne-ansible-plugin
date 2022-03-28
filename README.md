@@ -1,6 +1,6 @@
 # **ne-ansible-plugin**
 ne-ansible-plugin is an ansible plugin which is designed for managing HUAWEI net-engine series devices, e.g., ATN,
-NE,ME,CX routers.
+NE,ME,CE,CX routers.
 
 ## **Features**
 - provide command line plugin for managing huawei net-engine series products
