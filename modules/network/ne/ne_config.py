@@ -256,6 +256,7 @@ from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.u
 from ansible.module_utils.six import string_types
 from ansible_collections.ansible.netcommon.plugins.module_utils.network.common.utils import ComplexList
 from ansible.module_utils.connection import ConnectionError
+from ansible.module_utils.common.yaml import yaml_load
 if sys.version_info.major != 2:
     import importlib
     importlib.reload(sys)
