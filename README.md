@@ -69,6 +69,40 @@ ansible-galaxy collection list(List all the installed collections)
 ```
 ansible-galaxy collection install huaweidatacom.ne
 ```
+#### Extend ansible_builtin_runtime.yml
+- ne-module-redirection:
+```
+ne:
+  redirect: huaweidatacom.ne.ne
+```
+- find ansible_builtin_runtime.yml
+<br/>ansible_builtin_runtime.yml path = "ansible python module location" path + /config/ansible_builtin_runtime.yml
+```
+$ ansible --version
+ansible 2.10.17
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = ['/usr/share/ansible']
+  ansible python module location = /opt/buildtools/python-3.9.2/lib/python3.9/site-packages/ansible
+  executable location = /opt/buildtools/python-3.9.2/bin/ansible
+  python version = 3.9.2 (default, Oct 17 2021, 19:31:57) [GCC 7.3.0]
+$ cd /opt/buildtools/python-3.9.2/lib/python3.9/site-packages/ansible
+$ find ./ -name ansible_builtin_runtime.yml
+./config/ansible_builtin_runtime.yml
+```
+- please add the ne-module-redirection under cliconf layer in ansible_builtin_runtime.yml
+- please add the ne-module-redirection under terminal layer in ansible_builtin_runtime.yml
+```
+plugin_routing:
+  ...
+  cliconf:
+    ne:
+      redirect: huaweidatacom.ne.ne
+    ...
+  terminal:
+    ne:
+      redirect: huaweidatacom.ne.ne
+    ...
+```
 ## Command Plugin Templates for reference（NE Modules Introduction）
 Please refer to https://intl.devzone.huawei.com/en/datacom/network-element/docs/ansibleNE/ansibleNE.html?mdName=command-plugin-templates.md
 ## Additional Resources
