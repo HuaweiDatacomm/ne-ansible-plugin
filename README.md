@@ -42,7 +42,7 @@ $sh install.sh
 #### Prerequisites
 
 - OS: Red Hat,Ubuntu,CentOS,OS X,BSD,Suse
-- Python:  python3.6 or later (python 3.8 is preferred)/python3
+- Python:  python3.6 or later (python 3.9 is preferred)/python3
 - Ansible: 2.10+ or later.
 
 #### Download tarball(Off line)
@@ -51,19 +51,19 @@ wget  https://galaxy.ansible.com/download/huaweidatacom-ne-1.0.4.tar.gz
 ```
 
 ```
-mkdir ./huaweidatacom-ne-1.0.4
+ansible-galaxy collection install huaweidatacom-ne-1.0.4.tar.gz -p /usr/local/lib/python3.9/site-packages/ansible_collections/ --force
 ```
+- note: the value of param "-p" (-p $ANSIBLE_COLLECTION_PATH)
+<br/> Use command: "ansible-galaxy collection list" find $ANSIBLE_COLLECTION_PATH
+```
+# ansible-galaxy collection list
 
-```
-tar -zxvf huaweidatacom-ne-1.0.4.tar.gz -C ./huaweidatacom-ne-1.0.4
-```
-
-```
-ansible-galaxy collection install huaweidatacom-ne-1.0.4.tar.gz -p /usr/local/lib/python3.8/site-packages/ansible_collections/ --force (-p $ANSIBLE_COLLECTION_PATH)
-```
-
-```
-ansible-galaxy collection list(List all the installed collections)
+	# /usr/local/lib/python3.9/site-packages/ansible_collections/
+	Collection        Version
+	----------------- -------
+	ansible.netcommon 5.1.2
+	ansible.utils     2.10.3
+	huaweidatacom.ne  1.0.4
 ```
 #### Installation(On line)
 ```
@@ -78,15 +78,15 @@ ne:
 - find ansible_builtin_runtime.yml
 <br/>ansible_builtin_runtime.yml path = "ansible python module location" path + /config/ansible_builtin_runtime.yml
 ```
-$ ansible --version
+# ansible --version
 ansible 2.10.17
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/usr/share/ansible']
-  ansible python module location = /opt/buildtools/python-3.9.2/lib/python3.9/site-packages/ansible
-  executable location = /opt/buildtools/python-3.9.2/bin/ansible
+  ansible python module location = /usr/local/lib/python3.9/site-packages/ansible
+  executable location = /usr/local/lib/python3.9/bin/ansible
   python version = 3.9.2 (default, Oct 17 2021, 19:31:57) [GCC 7.3.0]
-$ cd /opt/buildtools/python-3.9.2/lib/python3.9/site-packages/ansible
-$ find ./ -name ansible_builtin_runtime.yml
+# cd /usr/local/lib/python3.9/site-packages/ansible
+# find ./ -name ansible_builtin_runtime.yml
 ./config/ansible_builtin_runtime.yml
 ```
 - please add the ne-module-redirection under cliconf layer in ansible_builtin_runtime.yml
