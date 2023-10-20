@@ -90,6 +90,7 @@ ansible 2.10.17
 ```
 - please add the ne-module-redirection under cliconf layer in ansible_builtin_runtime.yml
 - please add the ne-module-redirection under terminal layer in ansible_builtin_runtime.yml
+- please add the ne-module-redirection under netconf layer in ansible_builtin_runtime.yml
 ```
 plugin_routing:
   ...
@@ -98,6 +99,10 @@ plugin_routing:
       redirect: huaweidatacom.ne.ne
     ...
   terminal:
+    ne:
+      redirect: huaweidatacom.ne.ne
+    ...
+  netconf:
     ne:
       redirect: huaweidatacom.ne.ne
     ...
