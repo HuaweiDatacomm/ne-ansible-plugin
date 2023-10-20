@@ -75,6 +75,7 @@ ne:
 ```
 - find ansible_builtin_runtime.yml
 <br/>ansible_builtin_runtime.yml path = "ansible python module location" path + /config/ansible_builtin_runtime.yml
+<br/> Use command "ansible --version" to get "ansible python module location" path
 ```
 # ansible --version
 ansible 2.10.17
