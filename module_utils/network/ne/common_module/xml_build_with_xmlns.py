@@ -58,9 +58,9 @@ def create_xml_with_xmlns(root, new_xmlns_info_list, all_xpath_without_prefix, d
     :param dest_xpath: record the path of rebuild
     :param current_element: the current generate element root
     """
-    if root.getchildren():
+    if list(root):
         # traversing the xml root which need to be rebuild.( always come from instance xml )
-        for child_of_root in root.getchildren():
+        for child_of_root in list(root):
             dest_xpath = dest_xpath + "/" + child_of_root.tag
 
             # get value from instance xml
